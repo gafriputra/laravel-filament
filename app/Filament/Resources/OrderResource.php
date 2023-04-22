@@ -38,13 +38,10 @@ class OrderResource extends Resource
                         DatePicker::make('departure_date')
                             ->label('Departure Date'),
                         TextInput::make('hotel_information.name')
-                            ->disableAutocomplete()
-                            ->label('Hotel Name '),
+                            ->label('Hotel Name'),
                         TextInput::make('hotel_information.telephone')
-                            ->disableAutocomplete()
                             ->label('Hotel Telp'),
                         TextInput::make('hotel_information.address')
-                            ->disableAutocomplete()
                             ->label('Hotel Address'),
                         TagsInput::make('customer_requests')
                             ->hint('Tekan enter jika lebih dari satu')
@@ -76,6 +73,9 @@ class OrderResource extends Resource
                 TextColumn::make('hotel_information.name')
                     ->sortable(true)
                     ->label('Hotel Name'),
+                TextColumn::make('order_details_count')
+                    ->label('Order Details')
+                    ->counts('orderDetails'),
                 TextColumn::make('created_at')
                     ->sortable(true)
                     ->dateTime(),

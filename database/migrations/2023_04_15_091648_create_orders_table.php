@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('reference_number')->nullable();
+            $table->string('reference_number')->nullable()->unique();
             $table->date('arrival_date')->nullable();
             $table->date('departure_date')->nullable();
             $table->jsonb('hotel_information')->nullable();

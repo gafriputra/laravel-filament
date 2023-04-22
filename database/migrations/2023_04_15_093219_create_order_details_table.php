@@ -15,7 +15,7 @@ class CreateOrderDetailsTable extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('order_id');
+            $table->uuid('order_id');
             $table->string('room_type')->nullable();
             $table->string('bed_type')->nullable();
             $table->string('meal_type')->nullable();
