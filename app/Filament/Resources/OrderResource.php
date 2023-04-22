@@ -57,8 +57,6 @@ class OrderResource extends Resource
                             ->label('Customer Requests'),
                     ])
                     ->columns(2),
-                Card::make()
-                    ->schema([]),
             ]);
     }
 
@@ -95,7 +93,7 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\OrderDetailsRelationManager::class,
         ];
     }
 

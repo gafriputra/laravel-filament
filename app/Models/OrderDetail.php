@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class OrderDetail extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'room_type',
+        'bed_type',
+        'meal_type',
+    ];
 
     public function order()
     {
