@@ -15,7 +15,7 @@ class CreateGuestDetailsTable extends Migration
     {
         Schema::create('guest_details', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('order_detail_id');
+            $table->uuid('order_detail_id');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('type')->nullable();

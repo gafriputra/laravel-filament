@@ -1,22 +1,30 @@
 <?php
 
-namespace App\Filament\Resources\OrderResource\RelationManagers;
+namespace App\Filament\Resources;
 
+use App\Filament\Resources\OrderDetailResource\Pages;
+use App\Filament\Resources\OrderDetailResource\RelationManagers;
+use App\Models\OrderDetail;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class OrderDetailsRelationManager extends RelationManager
+class OrderDetailResource extends Resource
 {
-    protected static string $relationship = 'orderDetails';
+    protected static ?string $model = OrderDetail::class;
 
-    protected static ?string $recordTitleAttribute = 'id';
+    protected static ?string $navigationIcon = 'heroicon-o-collection';
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
 
     public static function form(Form $form): Form
     {
@@ -48,6 +56,8 @@ class OrderDetailsRelationManager extends RelationManager
     {
         return $table
             ->columns([
+                TextColumn::make('order.id'),
+                TextColumn::make('order.reference_number')->label('Reference Number'),
                 TextColumn::make('room_type'),
                 TextColumn::make('bed_type'),
                 TextColumn::make('meal_type'),
@@ -56,15 +66,27 @@ class OrderDetailsRelationManager extends RelationManager
             ->filters([
                 //
             ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make(),
-            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\GuestDetailsRelationManager::class,
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListOrderDetails::route('/'),
+            'create' => Pages\CreateOrderDetail::route('/create'),
+            'edit' => Pages\EditOrderDetail::route('/{record}/edit'),
+        ];
     }
 }

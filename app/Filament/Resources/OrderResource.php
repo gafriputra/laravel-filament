@@ -47,6 +47,7 @@ class OrderResource extends Resource
                             ->disableAutocomplete()
                             ->label('Hotel Address'),
                         TagsInput::make('customer_requests')
+                            ->hint('Tekan enter jika lebih dari satu')
                             ->placeholder('')
                             ->suggestions([
                                 'Non smoking room',

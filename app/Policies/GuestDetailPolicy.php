@@ -18,7 +18,7 @@ class GuestDetailPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class GuestDetailPolicy
      */
     public function view(User $user, GuestDetail $guestDetail)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class GuestDetailPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class GuestDetailPolicy
      */
     public function update(User $user, GuestDetail $guestDetail)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class GuestDetailPolicy
      */
     public function delete(User $user, GuestDetail $guestDetail)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class GuestDetailPolicy
      */
     public function restore(User $user, GuestDetail $guestDetail)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class GuestDetailPolicy
      */
     public function forceDelete(User $user, GuestDetail $guestDetail)
     {
-        //
+        return true;
     }
 }
