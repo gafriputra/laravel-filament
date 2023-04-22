@@ -11,10 +11,12 @@ class Model extends EloquentModel
      *
      * @return void
      */
-    protected static function boot() {
+    protected static function boot()
+    {
+        parent::boot();
         static::creating(function ($model) {
-            if ( ! $model->getKey()) {
-                $model->{$model->getKeyName()} = (string) Str::uuid();
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = Str::uuid()->toString();
             }
         });
     }
