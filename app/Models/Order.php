@@ -24,4 +24,19 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class, 'order_id', 'id');
     }
+
+    // this is a recommended way to declare event handlers
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($record) { // before delete() method call this
+            // $record->orderDetails()->delete();
+            // why looping? because we need trigger deletion event on OrderDetail model
+            // for deleting guest details
+            foreach($record->orderDetails as $orderDetail){
+                $orderDetail->delete();
+              }
+        });
+    }
 }

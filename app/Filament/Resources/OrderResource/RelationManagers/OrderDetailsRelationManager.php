@@ -28,17 +28,22 @@ class OrderDetailsRelationManager extends RelationManager
                     ->schema([
                         TextInput::make('room_type')
                             ->datalist([
+                                'Single Room',
                                 'Double Room',
                                 'Triple Room',
                             ])
+                            ->required()
                             ->disableAutocomplete(),
                         TextInput::make('bed_type')
                             ->datalist([
+                                '1 Single',
+                                '1 Double',
                                 '1 Double 1 Single',
                                 '1 Double 2 Single',
                                 '2 Double 1 Single',
                                 '2 Double 2 Single',
                             ])
+                            ->required()
                             ->disableAutocomplete(),
                         TextInput::make('meal_type')
                             ->datalist([
@@ -52,10 +57,12 @@ class OrderDetailsRelationManager extends RelationManager
                             ->relationship()
                             ->schema([
                                 TextInput::make('first_name')
+                                    ->required()
                                     ->disableAutocomplete(),
                                 TextInput::make('last_name')
                                     ->disableAutocomplete(),
                                 TextInput::make('type')
+                                    ->required()
                                     ->datalist([
                                         'Adult',
                                         'Child',

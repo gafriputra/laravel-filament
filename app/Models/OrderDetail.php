@@ -22,4 +22,14 @@ class OrderDetail extends Model
     {
         return $this->hasMany(GuestDetail::class, 'order_detail_id', 'id');
     }
+
+    // this is a recommended way to declare event handlers
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($record) { // before delete() method call this
+            $record->guestDetails()->delete();
+        });
+    }
 }

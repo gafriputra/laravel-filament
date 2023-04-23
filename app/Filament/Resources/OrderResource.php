@@ -6,6 +6,7 @@ use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
 use Filament\Forms;
+use Filament\Pages\Actions\Action;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TagsInput;
@@ -32,16 +33,22 @@ class OrderResource extends Resource
                     ->schema([
                         TextInput::make('reference_number')
                             ->disableAutocomplete()
+                            ->required()
                             ->label('Reference Number'),
                         DatePicker::make('arrival_date')
+                            ->required()
                             ->label('Arrival Date'),
                         DatePicker::make('departure_date')
+                            ->required()
                             ->label('Departure Date'),
                         TextInput::make('hotel_information.name')
+                            ->required()
                             ->label('Hotel Name'),
                         TextInput::make('hotel_information.telephone')
+                            ->required()
                             ->label('Hotel Telp'),
                         TextInput::make('hotel_information.address')
+                            ->required()
                             ->label('Hotel Address'),
                         TagsInput::make('customer_requests')
                             ->hint('Tekan enter jika lebih dari satu')
@@ -54,7 +61,7 @@ class OrderResource extends Resource
                             ])
                             ->label('Customer Requests'),
                     ])
-                    ->columns(2),
+                    ->columns(3),
             ]);
     }
 
@@ -84,7 +91,9 @@ class OrderResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make('id'),
+                Tables\Actions\Action::make('download')->icon('heroicon-s-download'),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
