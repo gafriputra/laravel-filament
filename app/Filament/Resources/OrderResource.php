@@ -91,7 +91,9 @@ class OrderResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\Action::make('download')->icon('heroicon-s-download'),
+                Tables\Actions\Action::make('download')
+                    ->action('download')
+                    ->icon('heroicon-s-download'),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
@@ -114,5 +116,10 @@ class OrderResource extends Resource
             'create' => Pages\CreateOrder::route('/create'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
+    }
+
+    public static function download()
+    {
+        dd(123);
     }
 }

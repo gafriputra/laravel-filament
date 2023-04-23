@@ -16,4 +16,10 @@ class ListOrders extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    public function download()
+    {
+        $resources = static::getResource();
+        $resources::download();
+    }
 }

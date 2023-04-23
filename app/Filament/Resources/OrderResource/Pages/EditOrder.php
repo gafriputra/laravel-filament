@@ -14,6 +14,17 @@ class EditOrder extends EditRecord
     {
         return [
             Actions\DeleteAction::make(),
+            Actions\Action::make('download')
+                ->label('Download')
+                ->action('download')
+                ->icon('heroicon-s-download')
+                ->keyBindings(['mod+p'])
         ];
+    }
+
+    public function download()
+    {
+        $resources = static::getResource();
+        $resources::download();
     }
 }
