@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('pdf', [PdfController::class, 'index']);
+Route::get('artisan', [PdfController::class, 'artisan']);
