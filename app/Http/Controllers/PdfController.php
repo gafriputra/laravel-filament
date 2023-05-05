@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use PDF;
+use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
-class PdfController extends Controller
+class PDFController extends Controller
 {
-    public function index()
+    public function generate(Request $request, $id)
     {
-        $pdf = PDF::loadView('pdf.sample', [
-            'logo'    => public_path('img/logo.PNG'),
+        $order = Order::with('orderDetails.guestDetails')->find($id);
+
+        $pdf = PDF::loadView('pdf.template', [
+            'order' => $order,
         ]);
+        return $pdf->download("reference_number_" . $order->reference_number . ".pdf");
 
-        return $pdf->download('hotel-voucher.pdf');
-    }
-
-    public function artisan()
-    {
-        Artisan::call();
+        // return view('pdf.template', [
+        //     'order' => $order,
+        // ]);
     }
 }

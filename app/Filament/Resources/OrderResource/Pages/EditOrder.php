@@ -16,15 +16,10 @@ class EditOrder extends EditRecord
             Actions\DeleteAction::make(),
             Actions\Action::make('download')
                 ->label('Download')
-                ->action('download')
+                ->url(fn (): string => route('generate-pdf', request()->route('record')))
+                ->openUrlInNewTab()
                 ->icon('heroicon-s-download')
                 ->keyBindings(['mod+p'])
         ];
-    }
-
-    public function download()
-    {
-        $resources = static::getResource();
-        $resources::download();
     }
 }

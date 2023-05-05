@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('pdf', [PdfController::class, 'index']);
+Route::get('generate-pdf/{id}', [PDFController::class, 'generate'])->name('generate-pdf');
 Route::get('artisan', [PdfController::class, 'artisan']);

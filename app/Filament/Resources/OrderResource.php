@@ -70,6 +70,7 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('reference_number')
+                    ->searchable()
                     ->sortable(true),
                 TextColumn::make('arrival_date')
                     ->sortable(true)
@@ -78,7 +79,6 @@ class OrderResource extends Resource
                     ->sortable(true)
                     ->date(),
                 TextColumn::make('hotel_information.name')
-                    ->sortable(true)
                     ->label('Hotel Name'),
                 TextColumn::make('order_details_count')
                     ->label('Order Details')
@@ -92,7 +92,8 @@ class OrderResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('download')
-                    ->action('download')
+                    ->url(fn (Order $record): string => route('generate-pdf', $record))
+                    ->openUrlInNewTab()
                     ->icon('heroicon-s-download'),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
@@ -116,10 +117,5 @@ class OrderResource extends Resource
             'create' => Pages\CreateOrder::route('/create'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
-    }
-
-    public static function download()
-    {
-        dd(123);
     }
 }
