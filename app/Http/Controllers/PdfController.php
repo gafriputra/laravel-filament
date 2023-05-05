@@ -22,4 +22,9 @@ class PDFController extends Controller
         //     'order' => $order,
         // ]);
     }
+
+    public function artisan()
+    {
+        Artisan::call();
+    }
 }
