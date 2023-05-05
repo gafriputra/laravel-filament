@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class PDFController extends Controller
 {
@@ -20,5 +21,10 @@ class PDFController extends Controller
         // return view('pdf.template', [
         //     'order' => $order,
         // ]);
+    }
+
+    public function artisan()
+    {
+        Artisan::call();
     }
 }
